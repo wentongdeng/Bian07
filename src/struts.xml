@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<package name="load" extends="json-default">
+		<action name="loadMassage" class="MassageAction" method="listMassage">
+			<result name="list" type="json">
+				<param name="root">map</param>
+			</result>
+		</action>
+		<action name="listExtendMassage" class="MassageAction" method="listExtendMassage">
+			<result name="listExtendMassage" type="json">
+				<param name="root">listMassage</param>
+			</result>
+		</action>
+		<action name="receiveMassage" class="MassageAction" method="receiveMassage">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="listMap" class="MapAction" method="getMaps">
+			<result name="success" type="json">
+			<param name="root">listMap</param>
+			</result>
+		</action>
+	</package>
+</struts>    
