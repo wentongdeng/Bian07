@@ -13,6 +13,11 @@
 				<param name="root">listMassage</param>
 			</result>
 		</action>
+		<action name="listMarkExtendMassage" class="MassageAction" method="listMarkExtendMassage">
+			<result name="listMarkExtendMassage" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
 		<action name="receiveMassage" class="MassageAction" method="receiveMassage">
 			<result name="success">/index.jsp</result>
 		</action>
@@ -20,6 +25,23 @@
 			<result name="success" type="json">
 			<param name="root">listMap</param>
 			</result>
+			
+		</action>
+		<action name="login" class="UserAction" method="login">
+			<result name="success">/index.jsp</result>
+			<result name="false">/index.jsp</result>
+		</action>
+		<action name="receiveMap" class="MapAction" method="receiveMassage">
+			<result name="success">/index.jsp</result>
+			<result name="failse">/index.jsp</result>
+			<interceptor-ref name="fileUpload">
+			<!-- 文件过滤 -->
+			<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+			<!-- 文件大小, 以字节为单位 -->
+			<param name="maximumSize">1025956</param>
+			</interceptor-ref>
+			<!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
+			<interceptor-ref name="defaultStack" />
 		</action>
 	</package>
 </struts>    

@@ -31,5 +31,11 @@
         <property name="utime" type="java.lang.String">
             <column name="utime" length="100" />
         </property>
+        <property name="uaccount" type="java.lang.String">
+            <column name="uaccount" length="100" />
+        </property>
+        <property name="upassword" type="java.lang.String">
+            <column name="upassword" length="100" />
+        </property>
     </class>
 </hibernate-mapping>

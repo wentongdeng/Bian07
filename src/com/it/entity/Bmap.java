@@ -1,10 +1,10 @@
 package com.it.entity;
 
 /**
- * Map entity. @author MyEclipse Persistence Tools
+ * Bmap entity. @author MyEclipse Persistence Tools
  */
 
-public class Map implements java.io.Serializable {
+public class Bmap implements java.io.Serializable {
 
 	// Fields
 
@@ -20,11 +20,11 @@ public class Map implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Map() {
+	public Bmap() {
 	}
 
 	/** full constructor */
-	public Map(Double longitude, Double latitude, String pmphoto, String ptitle, String pdescribe, Integer yh,
+	public Bmap(Double longitude, Double latitude, String pmphoto, String ptitle, String pdescribe, Integer yh,
 			String ptime) {
 		this.longitude = longitude;
 		this.latitude = latitude;

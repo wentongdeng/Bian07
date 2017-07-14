@@ -2,20 +2,27 @@ package com.it.action;
 
 import java.util.List;
 
+import com.it.entity.BmapDAO;
 import com.it.entity.ExtendMap;
-import com.it.entity.MapDAO;
+import com.it.server.MapServer;
+import com.it.serverImpl.MapServerImpl;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MapAction extends ActionSupport {
-	
-	public MapDAO mapDao;
+	public BmapDAO bmapDao;
+	public MapServerImpl mapServer;
 	public List<ExtendMap> listMap;
-	public MapDAO getMapDao() {
-		return mapDao;
+	
+	
+	public MapServerImpl getMapServer() {
+		return mapServer;
 	}
-	public void setMapDao(MapDAO mapDao) {
-		this.mapDao = mapDao;
+	public void setMapServer(MapServerImpl mapServer) {
+		this.mapServer = mapServer;
 	}
+	
+	
 	public List<ExtendMap> getListMap() {
 		return listMap;
 	}
@@ -24,12 +31,31 @@ public class MapAction extends ActionSupport {
 	}
 	public String getMaps(){
 		try{
-			listMap=mapDao.findExtendMap();
+			listMap=bmapDao.findExtendMap();
 			return "success";
 		}catch(Exception e){
 			System.out.println(e);
 			return "faliur";
 		}
 		
+	}
+	
+	public String receiveMassage(){
+		try{
+			ActionContext ctx=ActionContext.getContext();
+			mapServer.getRequestBody(ctx);
+			return "success";
+		}catch (Exception e){
+			System.out.println(e);
+			return "failse";
+		}
+		
+	}
+	
+	public BmapDAO getBmapDao() {
+		return bmapDao;
+	}
+	public void setBmapDao(BmapDAO bmapDao) {
+		this.bmapDao = bmapDao;
 	}
 }

@@ -16,6 +16,8 @@ public class User implements java.io.Serializable {
 	private String upicture;
 	private Integer uage;
 	private String utime;
+	private String uaccount;
+	private String upassword;
 
 	// Constructors
 
@@ -24,8 +26,8 @@ public class User implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public User(String uname, String usex, String uemail, String qqnumber, String upicture, Integer uage,
-			String utime) {
+	public User(String uname, String usex, String uemail, String qqnumber, String upicture, Integer uage, String utime,
+			String uaccount, String upassword) {
 		this.uname = uname;
 		this.usex = usex;
 		this.uemail = uemail;
@@ -33,6 +35,8 @@ public class User implements java.io.Serializable {
 		this.upicture = upicture;
 		this.uage = uage;
 		this.utime = utime;
+		this.uaccount = uaccount;
+		this.upassword = upassword;
 	}
 
 	// Property accessors
@@ -99,6 +103,22 @@ public class User implements java.io.Serializable {
 
 	public void setUtime(String utime) {
 		this.utime = utime;
+	}
+
+	public String getUaccount() {
+		return this.uaccount;
+	}
+
+	public void setUaccount(String uaccount) {
+		this.uaccount = uaccount;
+	}
+
+	public String getUpassword() {
+		return this.upassword;
+	}
+
+	public void setUpassword(String upassword) {
+		this.upassword = upassword;
 	}
 
 }

@@ -1,13 +1,16 @@
 package com.it.serverImpl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -15,8 +18,8 @@ import org.apache.struts2.ServletActionContext;
 import com.it.entity.ExtendMassage;
 import com.it.entity.Massage;
 import com.it.entity.MassageDAO;
+import com.it.entity.Msphoto;
 import com.it.entity.MsphotoDAO;
-import com.it.entity.User;
 import com.it.entity.UserDAO;
 import com.it.server.MassageServer;
 import com.opensymphony.xwork2.ActionContext;
@@ -67,6 +70,7 @@ public class MassageServerImpl implements MassageServer {
 	        Set<Entry<String, String[]>> set = map.entrySet();  
 	        Iterator<Entry<String, String[]>> it = set.iterator();
 	        Massage massage=new Massage();
+	        Msphoto photo=new Msphoto();
 	        //按顺序来来
 	        int count=1;
 	        while (it.hasNext()) {  
@@ -93,6 +97,35 @@ public class MassageServerImpl implements MassageServer {
 	        massage.setMlike(2);;
 	        massage.setMcomment(2);
 	        massageDao.save(massage);
+	        List msgs=massageDao.findByExample(massage);
+	        Massage msg;
+	        if(msgs.get(0)!=null){
+	        	msg=(Massage) msgs.get(0);
+	        	Map params = ctx.getParameters(); 
+		        File[] image = (File[])params.get("image"); 
+		        System.out.println("图片"+image);
+		        for(int n=0;n<image.length;n++){
+		        	 String wjFileName= new java.util.Date().getTime()+"image.jpg";  
+		             ServletContext servletContext=ServletActionContext.getServletContext();  
+		             String path=servletContext.getRealPath("/Image/"+wjFileName);//文件最终要上传到的路径  
+		             FileOutputStream out=new FileOutputStream(path);  
+		             FileInputStream in=new FileInputStream(image[n]);  
+		             byte[]buffer=new byte[1024];  
+		             int len=0;  
+		             while((len=in.read(buffer))!=-1){  
+		                 out.write(buffer,0,len);  
+		                   
+		             }
+		             photo.setMpaddress(path);
+		             photo.setDid(msg.getId());
+		             String photoPath="http://10.151.254.125:8080/Bian07/"+"/Image/"+wjFileName;
+		             photo.setMpaddress(photoPath);
+		             msphotoDao.save(photo);
+		             out.close();  
+		             in.close();  
+		        }
+	        }
+	        
 			return "success";
 		}catch(Exception e){
 			System.out.println(e);

@@ -2,15 +2,8 @@ package com.it.action;
 
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 
 import com.it.entity.ExtendMassage;
 import com.it.entity.Massage;
@@ -27,7 +20,7 @@ public class MassageAction extends ActionSupport {
 	Map<String,Object> map;
 	public List<ExtendMassage> listMassage;
 	public MassageServerImpl massageServer;
-	
+	HashMap<String ,Object> msg;
 	public MassageServerImpl getMassageServer() {
 		return massageServer;
 	}
@@ -55,7 +48,19 @@ public class MassageAction extends ActionSupport {
 		listMassage=massageServer.getMassage();
 		return "listExtendMassage";
 	}
+	public String listMarkExtendMassage(){
+		listMassage=massageServer.getMassage();
+		msg=new HashMap<String,Object>();
+		msg.put("markMassages", listMassage);
+		return "listMarkExtendMassage";
+	}
 	
+	public HashMap<String, Object> getMsg() {
+		return msg;
+	}
+	public void setMsg(HashMap<String, Object> msg) {
+		this.msg = msg;
+	}
 	public Map<String, Object> getMap() {
 		return map;
 	}

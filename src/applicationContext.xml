@@ -29,21 +29,16 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/it/entity/Map.hbm.xml</value>
 				<value>com/it/entity/Massage.hbm.xml</value>
 				<value>com/it/entity/Msphoto.hbm.xml</value>
-				<value>com/it/entity/User.hbm.xml</value></list>
+				<value>com/it/entity/User.hbm.xml</value>
+				<value>com/it/entity/Bmap.hbm.xml</value></list>
 		</property></bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager" /><bean
-		id="MapDAO" class="com.it.entity.MapDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="MassageDAO" class="com.it.entity.MassageDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -69,12 +64,23 @@
 		<property name="msphotoDao" ref="MsphotoDAO"></property>
 	</bean>
 	<bean name="MapAction" class="com.it.action.MapAction">
-		<property name="mapDao" ref="MapDAO"></property>
+		<property name="bmapDao" ref="BmapDAO"></property>
+		<property name="mapServer" ref="mapServer"></property>
+	</bean>
+	<bean name="mapServer" class="com.it.serverImpl.MapServerImpl">
+		<property name="mapDao" ref="BmapDAO"></property>
+	</bean>
+	<bean name="userServer" class="com.it.serverImpl.UserServerImpl">
+		<property name="userDao" ref="UserDAO"></property>
+	</bean>
+	<bean name="UserAction" class="com.it.action.UserAction">
+		<property name="userServer" ref="userServer"></property>
 	</bean>
 	
 	
 	
-	
-	
-	
-	</beans>
+	<bean id="BmapDAO" class="com.it.entity.BmapDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

@@ -33,6 +33,8 @@ public class UserDAO {
 	public static final String UPICTURE = "upicture";
 	public static final String UAGE = "uage";
 	public static final String UTIME = "utime";
+	public static final String UACCOUNT = "uaccount";
+	public static final String UPASSWORD = "upassword";
 
 	private SessionFactory sessionFactory;
 
@@ -133,6 +135,14 @@ public class UserDAO {
 
 	public List findByUtime(Object utime) {
 		return findByProperty(UTIME, utime);
+	}
+
+	public List findByUaccount(Object uaccount) {
+		return findByProperty(UACCOUNT, uaccount);
+	}
+
+	public List findByUpassword(Object upassword) {
+		return findByProperty(UPASSWORD, upassword);
 	}
 
 	public List findAll() {
